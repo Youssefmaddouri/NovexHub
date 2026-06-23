@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novex HUB · premium game studio</title>
+  <!-- Font & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #090909;
+      color: #eaeaea;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      transition: background 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.5s ease;
+    }
+
+    body.light-mode {
+      background: #f5f5f7;
+      color: #181818;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #090909; }
+    ::-webkit-scrollbar-thumb { background: #2a6f5c; border-radius: 20px; }
+    body.light-mode ::-webkit-scrollbar-track { background: #eaeaea; }
+    body.light-mode ::-webkit-scrollbar-thumb { background: #3daf8a; }
+
+    /* container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* sticky nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.8rem;
+      background: rgba(9, 9, 9, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42, 111, 92, 0.1);
+      transition: background 0.5s ease, border 0.5s ease, box-shadow 0.4s;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+    body.light-mode nav {
+      background: rgba(245, 245, 247, 0.75);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: #eaeaea;
+      transition: color 0.3s;
+    }
+    body.light-mode nav .logo { color: #181818; }
+
+    /* مساحة مخصصة للشعار الفعلي */
+    nav .logo .logo-image {
+      height: 40px;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    nav .logo .logo-image img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+    /* في حال عدم وجود صورة، يظهر placeholder */
+    nav .logo .logo-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #3daf8a, #1a5a4a);
+      border-radius: 10px;
+      color: #090909;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 20px rgba(61, 175, 138, 0.2);
+    }
+    nav .logo .logo-text {
+      display: flex;
+      align-items: baseline;
+      gap: 0.1rem;
+    }
+    nav .logo .logo-text span { color: #3daf8a; }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 2.8rem;
+      list-style: none;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.4px;
+    }
+    nav ul a {
+      color: #cfcfcf;
+      text-decoration: none;
+      transition: 0.25s;
+      position: relative;
+      font-weight: 400;
+    }
+    body.light-mode nav ul a { color: #3a3a3a; }
+    nav ul a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 1.5px;
+      background: #3daf8a;
+      transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    nav ul a:hover { color: #fff; }
+    body.light-mode nav ul a:hover { color: #0c0c0c; }
+    nav ul a:hover::after { width: 100%; }
+
+    /* theme toggle */
+    .theme-toggle {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #cfcfcf;
+      width: 42px;
+      height: 42px;
+      border-radius: 60px;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.light-mode .theme-toggle {
+      border-color: rgba(0,0,0,0.06);
+      color: #2a2a2a;
+      background: rgba(255,255,255,0.4);
+    }
+    .theme-toggle:hover {
+      background: rgba(61, 175, 138, 0.12);
+      border-color: #3daf8a;
+      transform: scale(1.05);
+    }
+
+    /* hero */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0 4rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(circle at 70% 50%, rgba(61, 175, 138, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(61, 175, 138, 0.1), transparent);
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-content {
+      flex: 1 1 400px;
+      z-index: 2;
+    }
+    .hero-content .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61, 175, 138, 0.08);
+      color: #3daf8a;
+      padding: 0.4rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(61, 175, 138, 0.1);
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+    .hero-content h1 {
+      font-size: clamp(3rem, 8vw, 5.6rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-content h1 .highlight { 
+      color: #3daf8a;
+      position: relative;
+      display: inline-block;
+    }
+    .hero-content h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: rgba(61, 175, 138, 0.12);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #acacac;
+      max-width: 450px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+    body.light-mode .hero-content p { color: #4a4a4a; }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .btn {
+      padding: 0.9rem 2.6rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      letter-spacing: 0.3px;
+    }
+    .btn-primary {
+      background: #3daf8a;
+      color: #090909;
+      box-shadow: 0 8px 32px rgba(61, 175, 138, 0.15);
+    }
+    .btn-primary:hover {
+      background: #4ec9a2;
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: 0 12px 40px rgba(61, 175, 138, 0.25);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #eaeaea;
+      backdrop-filter: blur(4px);
+    }
+    body.light-mode .btn-outline {
+      border-color: rgba(0, 0, 0, 0.08);
+      color: #181818;
+    }
+    .btn-outline:hover {
+      background: rgba(61, 175, 138, 0.06);
+      border-color: #3daf8a;
+      transform: scale(1.03) translateY(-2px);
+    }
+
+    /* floating logo */
+    .hero-visual {
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+    .floating-logo {
+      font-size: 12rem;
+      font-weight: 700;
+      color: rgba(61, 175, 138, 0.03);
+      text-shadow: 0 0 140px rgba(61, 175, 138, 0.05);
+      letter-spacing: -0.06em;
+      animation: float 8s ease-in-out infinite;
+      user-select: none;
+      line-height: 1;
+    }
+    body.light-mode .floating-logo {
+      color: rgba(61, 175, 138, 0.05);
+    }
+    @keyframes float {
+      0% { transform: translateY(0px) scale(1) rotate(-1deg); }
+      50% { transform: translateY(-25px) scale(1.03) rotate(1.5deg); }
+      100% { transform: translateY(0px) scale(1) rotate(-1deg); }
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 3rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title span { color: #3daf8a; }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: #3daf8a;
+      border-radius: 4px;
+      opacity: 0.4;
+    }
+
+    /* about */
+    .about {
+      padding: 6rem 0 5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.015);
+    }
+    body.light-mode .about {
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text {
+      flex: 2 1 300px;
+    }
+    .about-text p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #c7c7c7;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    body.light-mode .about-text p { color: #3a3a3a; }
+    .stats {
+      flex: 1 1 200px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: #3daf8a;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: #aaa;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+    body.light-mode .stat-label { color: #5a5a5a; }
+
+    /* team */
+    .team {
+      padding: 6rem 0 5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.015);
+    }
+    body.light-mode .team {
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.2rem;
+      margin-top: 1.5rem;
+    }
+    .team-card {
+      background: rgba(255, 255, 255, 0.015);
+      padding: 2.2rem 1.2rem;
+      border-radius: 32px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(61, 175, 138, 0.04), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .team-card:hover::before { opacity: 1; }
+    body.light-mode .team-card {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .team-card:hover {
+      transform: translateY(-12px);
+      background: rgba(61, 175, 138, 0.04);
+      border-color: rgba(61, 175, 138, 0.12);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+    body.light-mode .team-card:hover {
+      background: rgba(61, 175, 138, 0.06);
+      border-color: #3daf8a;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.04);
+    }
+    .team-card .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 60px;
+      background: linear-gradient(135deg, rgba(61, 175, 138, 0.15), rgba(42, 111, 92, 0.05));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #3daf8a;
+      border: 1px solid rgba(61, 175, 138, 0.08);
+    }
+    .team-card h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+    .team-card .role {
+      color: #3daf8a;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .team-card .subrole {
+      color: #888;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+    }
+    body.light-mode .team-card .subrole { color: #5a5a5a; }
+
+    /* careers */
+    .careers {
+      padding: 6rem 0 5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.015);
+    }
+    body.light-mode .careers {
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 2.2rem;
+      margin-top: 0.5rem;
+    }
+    .career-card {
+      background: rgba(255, 255, 255, 0.015);
+      padding: 2.5rem 1.8rem;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .career-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #3daf8a, transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .career-card:hover::after { opacity: 1; }
+    body.light-mode .career-card {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .career-card:hover {
+      transform: scale(1.02) translateY(-6px);
+      background: rgba(61, 175, 138, 0.04);
+      border-color: rgba(61, 175, 138, 0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    body.light-mode .career-card:hover {
+      background: rgba(61, 175, 138, 0.06);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.04);
+    }
+    .career-card .career-icon {
+      font-size: 2rem;
+      color: #3daf8a;
+      margin-bottom: 0.8rem;
+      opacity: 0.5;
+    }
+    .career-card h4 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .career-card p {
+      color: #a5a5a5;
+      font-weight: 300;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    body.light-mode .career-card p { color: #4a4a4a; }
+
+    /* contact */
+    .contact {
+      padding: 6rem 0 5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.015);
+    }
+    body.light-mode .contact {
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .contact-card {
+      background: rgba(255, 255, 255, 0.015);
+      padding: 4rem 3.5rem;
+      border-radius: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 40%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(61, 175, 138, 0.02), transparent 70%);
+      pointer-events: none;
+    }
+    body.light-mode .contact-card {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .contact-card:hover {
+      border-color: rgba(61, 175, 138, 0.06);
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-info a {
+      color: #eaeaea;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    body.light-mode .contact-info a { color: #181818; }
+    .contact-info a i { 
+      color: #3daf8a; 
+      width: 1.8rem;
+      font-size: 1.2rem;
+    }
+    .contact-info a:hover { 
+      color: #3daf8a; 
+      transform: translateX(4px);
+    }
+    .btn-contact {
+      background: #3daf8a;
+      color: #090909;
+      padding: 1rem 3.2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      border: none;
+      font-size: 1rem;
+      transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(61, 175, 138, 0.12);
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-contact:hover {
+      background: #4ec9a2;
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: 0 12px 40px rgba(61, 175, 138, 0.2);
+    }
+
+    /* footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.015);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: #6a6a6a;
+      font-weight: 300;
+      font-size: 0.9rem;
+    }
+    body.light-mode footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      color: #4a4a4a;
+    }
+    footer span { color: #3daf8a; }
+    footer .footer-icons {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1rem;
+    }
+    footer .footer-icons i {
+      opacity: 0.25;
+      transition: 0.3s;
+      cursor: default;
+    }
+    footer .footer-icons i:hover { opacity: 0.6; }
+
+    /* profile overlay */
+    .profile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .profile-overlay.active { display: flex; }
+    .profile-modal {
+      background: #141414;
+      max-width: 620px;
+      width: 100%;
+      padding: 3.5rem 3rem;
+      border-radius: 48px;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 60px 120px rgba(0,0,0,0.7);
+      position: relative;
+      animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    body.light-mode .profile-modal {
+      background: #fafafa;
+      border: 1px solid rgba(0,0,0,0.03);
+      box-shadow: 0 60px 120px rgba(0,0,0,0.04);
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .profile-modal h2 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .profile-modal .p-role {
+      color: #3daf8a;
+      font-weight: 400;
+      margin: 0.2rem 0 1.8rem;
+      font-size: 1rem;
+    }
+    .profile-modal p {
+      color: #b5b5b5;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    body.light-mode .profile-modal p { color: #3a3a3a; }
+    .profile-modal .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.8rem 0;
+    }
+    .profile-modal .skills span {
+      background: rgba(61, 175, 138, 0.08);
+      padding: 0.3rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(61, 175, 138, 0.06);
+      color: #c2c2c2;
+      font-weight: 400;
+    }
+    body.light-mode .profile-modal .skills span {
+      background: rgba(61, 175, 138, 0.06);
+      color: #181818;
+    }
+    .close-profile {
+      position: absolute;
+      top: 1.8rem;
+      right: 2rem;
+      background: transparent;
+      border: none;
+      color: #aaa;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .close-profile:hover { 
+      color: #fff; 
+      background: rgba(255,255,255,0.04);
+      transform: rotate(90deg);
+    }
+    body.light-mode .close-profile { color: #5a5a5a; }
+    body.light-mode .close-profile:hover { color: #0c0c0c; background: rgba(0,0,0,0.03); }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    /* responsive */
+    @media (max-width: 800px) {
+      nav ul { gap: 1.2rem; font-size: 0.8rem; }
+      nav { padding: 0.8rem 1.5rem; flex-wrap: wrap; }
+      .hero-content h1 { font-size: 3rem; }
+      .hero-visual { justify-content: center; margin-top: 2rem; }
+      .floating-logo { font-size: 6rem; }
+      .contact-card { flex-direction: column; align-items: flex-start; gap: 2rem; padding: 2rem; }
+      .section-title { font-size: 2.2rem; }
+      nav .logo .logo-image { height: 32px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 1rem; }
+      nav ul { gap: 0.8rem; font-size: 0.7rem; }
+      .btn-group .btn { padding: 0.6rem 1.5rem; font-size: 0.8rem; }
+      .profile-modal { padding: 2rem 1.5rem; }
+      nav .logo { font-size: 1.2rem; }
+      nav .logo .logo-image { height: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <!-- مساحة مخصصة لشعارك الفعلي - ضع اسم ملف الشعار هنا -->
+      <div class="logo-image">
+        <!-- قم بتغيير اسم الملف إلى logo.png أو أي اسم تريده -->
+        <img src="logo.png" alt="Novex HUB" onerror="this.style.display='none'" />
+        <!-- في حال عدم وجود الصورة، يظهر placeholder -->
+        <div class="logo-placeholder" style="display: none;">N</div>
+      </div>
+      <div class="logo-text">
+        Novex <span>HUB</span>
+      </div>
+    </div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero container" id="home">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="badge">
+          <i class="fas fa-circle" style="font-size: 0.4rem; color: #3daf8a;"></i> EST. 2026
+        </div>
+        <h1>Building <br/><span class="highlight">Digital Worlds</span></h1>
+        <p>Premium Game Development Studio</p>
+        <div class="btn-group">
+          <a href="#careers" class="btn btn-primary">Explore Careers</a>
+          <a href="#team" class="btn btn-outline">Meet Team</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-logo">✦</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about container" id="about">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <h2 class="section-title">About <span>Novex</span></h2>
+        <p>Novex HUB is an independent game development studio focused on creating immersive experiences through technology, design and artistic direction.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-item"><div class="stat-number">05</div><div class="stat-label">Core Members</div></div>
+        <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Creative Ideas</div></div>
+        <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Development</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team container" id="team">
+    <h2 class="section-title reveal">Core <span>Team</span></h2>
+    <div class="team-grid" id="teamGrid">
+      <!-- cards from data -->
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section class="careers container" id="careers">
+    <h2 class="section-title reveal">Careers <span>@ Novex</span></h2>
+    <div class="career-grid reveal">
+      <div class="career-card reveal-delay-1">
+        <div class="career-icon"><i class="fas fa-code"></i></div>
+        <h4>Developers</h4>
+        <p>Gameplay, engine & tools</p>
+      </div>
+      <div class="career-card reveal-delay-2">
+        <div class="career-icon"><i class="fas fa-paint-brush"></i></div>
+        <h4>Designer</h4>
+        <p>UX, UI & interactive systems</p>
+      </div>
+      <div class="career-card reveal-delay-3">
+        <div class="career-icon"><i class="fas fa-cube"></i></div>
+        <h4>3D Modeling</h4>
+        <p>High‑poly & real‑time assets</p>
+      </div>
+      <div class="career-card reveal-delay-1">
+        <div class="career-icon"><i class="fas fa-pen-fancy"></i></div>
+        <h4>2D Modeling & Sculpting</h4>
+        <p>Concept art & stylized sculpts</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact container" id="contact">
+    <div class="contact-card reveal">
+      <div class="contact-info">
+        <a href="mailto:youssefmaddouri0@gmail.com"><i class="fas fa-envelope"></i> youssefmaddouri0@gmail.com</a>
+        <a href="tel:+21621669015"><i class="fas fa-phone-alt"></i> +216 21 669 015</a>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <a href="https://www.instagram.com/youssefmaddouri_/" target="_blank"><i class="fab fa-instagram"></i> Founder</a>
+          <a href="https://www.instagram.com/yahya_code6/" target="_blank"><i class="fab fa-instagram"></i> Team</a>
+        </div>
+      </div>
+      <a href="mailto:youssefmaddouri0@gmail.com" class="btn-contact"><i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Contact</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <div>© 2026 <span>Novex HUB</span> — premium game studio</div>
+    <div class="footer-icons">
+      <i class="fas fa-cube"></i>
+      <i class="fas fa-code"></i>
+      <i class="fas fa-paint-brush"></i>
+    </div>
+  </footer>
+
+  <!-- PROFILE OVERLAY -->
+  <div class="profile-overlay" id="profileOverlay">
+    <div class="profile-modal" id="profileModal">
+      <button class="close-profile" id="closeProfile">&times;</button>
+      <h2 id="pName">YOUSSEF</h2>
+      <div class="p-role" id="pRole">UI/UX Developer · Designer</div>
+      <p id="pDesc">Crafted with passion, built with precision.</p>
+      <div class="skills" id="pSkills">
+        <span>UI/UX</span><span>Design</span><span>Prototype</span>
+      </div>
+      <p id="pContribution"><i class="fas fa-code" style="color: #3daf8a; margin-right: 10px;"></i>Core contributor · design systems</p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // TEAM DATA
+      const members = [
+        { name: 'YOUSSEF', role: 'UI/UX Developer', sub: 'Designer', desc: 'Crafted with passion, built with precision.', skills: ['UI/UX','Design','Prototype'], contribution: 'Core contributor · design systems' },
+        { name: 'TALAL', role: '3D Modeling', sub: 'Sculpting', desc: 'Brings worlds to life with digital clay.', skills: ['ZBrush','Maya','Sculpting'], contribution: 'Lead 3D artist · high‑poly assets' },
+        { name: 'YAHYA', role: 'Developer', sub: '', desc: 'Full‑stack game engineering & tools.', skills: ['C++','Unity','Unreal'], contribution: 'Core engine · gameplay systems' },
+        { name: 'HATIM', role: 'Developer', sub: '', desc: 'Logic & performance optimization.', skills: ['C#','Python','AI'], contribution: 'AI & backend systems' },
+        { name: 'HADI', role: '2D Modeling', sub: 'Sculpting', desc: 'Concept & stylized 2D sculpts.', skills: ['Photoshop','Procreate','Concept'], contribution: 'Concept art · 2D assets' }
+      ];
+
+      const teamGrid = document.getElementById('teamGrid');
+      if (teamGrid) {
+        members.forEach((m, idx) => {
+          const card = document.createElement('div');
+          card.className = 'team-card reveal';
+          card.setAttribute('data-index', idx);
+          const initial = m.name.charAt(0);
+          card.innerHTML = `
+            <div class="avatar">${initial}</div>
+            <h3>${m.name}</h3>
+            <div class="role">${m.role}</div>
+            ${m.sub ? `<div class="subrole">${m.sub}</div>` : ''}
+          `;
+          card.addEventListener('click', () => openProfile(idx));
+          teamGrid.appendChild(card);
+        });
+      }
+
+      // PROFILE LOGIC
+      const overlay = document.getElementById('profileOverlay');
+      const closeBtn = document.getElementById('closeProfile');
+
+      function openProfile(index) {
+        const m = members[index];
+        if (!m) return;
+        document.getElementById('pName').textContent = m.name;
+        document.getElementById('pRole').textContent = m.role + (m.sub ? ' · ' + m.sub : '');
+        document.getElementById('pDesc').textContent = m.desc || 'Crafted with passion.';
+        const skillsContainer = document.getElementById('pSkills');
+        skillsContainer.innerHTML = m.skills.map(s => `<span>${s}</span>`).join('');
+        document.getElementById('pContribution').innerHTML = `<i class="fas fa-code" style="color: #3daf8a; margin-right: 10px;"></i>${m.contribution || 'Core team member'}`;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeProfile() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeProfile);
+      if (overlay) overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeProfile();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeProfile();
+      });
+
+      // SCROLL REVEAL
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      reveals.forEach(el => observer.observe(el));
+
+      // SMOOTH ANCHOR
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // THEME TOGGLE
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem('novex-theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        themeIcon.className = 'fas fa-sun';
+      } else {
+        themeIcon.className = 'fas fa-moon';
+      }
+
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('novex-theme', isLight ? 'light' : 'dark');
+      });
+
+      // إظهار placeholder في حال فشل تحميل الصورة
+      const logoImg = document.querySelector('.logo-image img');
+      const logoPlaceholder = document.querySelector('.logo-placeholder');
+      if (logoImg && logoPlaceholder) {
+        logoImg.addEventListener('error', function() {
+          this.style.display = 'none';
+          logoPlaceholder.style.display = 'flex';
+        });
+        // إذا لم توجد الصورة، نعرض placeholder
+        if (!logoImg.complete || logoImg.naturalWidth === 0) {
+          // سيتم التعامل معه عبر onerror
+        }
+      }
+    })();
+  </script>
+
+</body>
+</html>
